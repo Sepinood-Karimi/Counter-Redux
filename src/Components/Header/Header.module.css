@@ -14,7 +14,7 @@
 .header button{
     background-color: #ffbb00;
     border: 1px solid #ffbb00;
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: 0 30px;
+    border-radius: 5px;
     font-size: 1.125rem;
 }
