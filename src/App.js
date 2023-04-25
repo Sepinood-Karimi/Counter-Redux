@@ -1,12 +1,18 @@
 import Header from "./Components/Header/Header";
 import Counter from "./Components/Counter/Counter";
+import Auth from "./Components/Auth/Auth";
+import classes from "./App.module.css";
+import classnames from "classnames";
 
 function App() {
   return (
-    <div>
+    <>
       <Header />
-      <Counter />
-    </div>
+      <main className={classnames(classes.main)}>
+        {/*<Counter />*/}
+        <Auth />
+      </main>
+    </>
   );
 }
 

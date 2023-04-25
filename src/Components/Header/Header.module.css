@@ -18,3 +18,12 @@
     border-radius: 5px;
     font-size: 1.125rem;
 }
+
+.header button:hover{
+    cursor: pointer;
+}
+
+.header button:hover , .header button:focus{
+    background-color: #ffa600;
+    border-color: #ffa600;
+}
