@@ -2,32 +2,32 @@ import Card from "../UI/Card/Card";
 import classes from "./Counter.module.css";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
-import { counterActions } from "../../Store";
+import { counterSliceActions } from "../../Store/counterSlice";
 
 const Counter = () => {
-  const number = useSelector((state) => state.number);
-  const show = useSelector((state) => state.show);
+  const number = useSelector((state) => state.counter.number);
+  const show = useSelector((state) => state.counter.show);
   const dispatch = useDispatch();
 
   const payloadNumber = 10;
 
   const incrementHandler = () => {
-    dispatch(counterActions.increment());
+    dispatch(counterSliceActions.increment());
   };
   const decrementHandler = () => {
-    dispatch(counterActions.decrement());
+    dispatch(counterSliceActions.decrement());
   };
 
   const increaseHandler = () => {
-    dispatch(counterActions.increase(payloadNumber));
+    dispatch(counterSliceActions.increase(payloadNumber));
   };
 
   const decreaseHandler = () => {
-    dispatch(counterActions.decrease(payloadNumber));
+    dispatch(counterSliceActions.decrease(payloadNumber));
   };
 
   const toggleNumberHandler = () => {
-    dispatch(counterActions.toggle());
+    dispatch(counterSliceActions.toggle());
   };
   return (
     <Card additionalClasses={classes.counter}>
