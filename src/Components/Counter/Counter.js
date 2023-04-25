@@ -2,6 +2,7 @@ import Card from "../UI/Card/Card";
 import classes from "./Counter.module.css";
 import classnames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
+import { counterActions } from "../../Store";
 
 const Counter = () => {
   const number = useSelector((state) => state.number);
@@ -11,27 +12,27 @@ const Counter = () => {
   const payloadNumber = 10;
 
   const incrementHandler = () => {
-    dispatch({ type: "increment" });
+    dispatch(counterActions.increment());
   };
   const decrementHandler = () => {
-    dispatch({ type: "decrement" });
+    dispatch(counterActions.decrement());
   };
 
   const increaseHandler = () => {
-    dispatch({ type: "increase", payload: payloadNumber });
+    dispatch(counterActions.increase(payloadNumber));
   };
 
   const decreaseHandler = () => {
-    dispatch({ type: "decrease", payload: payloadNumber });
+    dispatch(counterActions.decrease(payloadNumber));
   };
 
   const toggleNumberHandler = () => {
-    dispatch({ type: "toggle" });
+    dispatch(counterActions.toggle());
   };
   return (
     <Card additionalClasses={classes.counter}>
       <h4> Redux Counter</h4>
-      <h2> {number} </h2>
+      {show && <h2> {number} </h2>}
       {show && (
         <div>
           <div>
