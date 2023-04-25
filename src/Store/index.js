@@ -1,3 +1,5 @@
+// redux-toolkit
+
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 const defaultCounterState = {
@@ -33,6 +35,9 @@ const store = configureStore({
 
 export default store;
 export const counterActions = counterState.actions;
+
+// simple redux
+
 // import { createStore } from "redux";
 //
 // const defaultStateObj = {
