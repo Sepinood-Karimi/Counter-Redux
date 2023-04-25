@@ -1,3 +1,38 @@
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+
+const defaultCounterState = {
+  number: 0,
+  show: true,
+};
+
+const counterState = createSlice({
+  name: "counter",
+  initialState: defaultCounterState,
+  reducers: {
+    increment(state) {
+      state.number++;
+    },
+    decrement(state) {
+      state.number--;
+    },
+    increase(state, action) {
+      state.number = state.number + action.payload;
+    },
+    decrease(state, action) {
+      state.number = state.number - action.payload;
+    },
+    toggle(state) {
+      state.show = !state.show;
+    },
+  },
+});
+
+const store = configureStore({
+  reducer: counterState.reducer,
+});
+
+export default store;
+export const counterActions = counterState.actions;
 // import { createStore } from "redux";
 //
 // const defaultStateObj = {
@@ -41,38 +76,3 @@
 // const store = createStore(reducerFunc);
 //
 // export default store;
-import { configureStore, createSlice } from "@reduxjs/toolkit";
-
-const defaultCounterState = {
-  number: 0,
-  show: true,
-};
-
-const counterState = createSlice({
-  name: "counter",
-  initialState: defaultCounterState,
-  reducers: {
-    increment(state) {
-      state.number++;
-    },
-    decrement(state) {
-      state.number--;
-    },
-    increase(state, action) {
-      state.number = state.number + action.payload;
-    },
-    decrease(state, action) {
-      state.number = state.number - action.payload;
-    },
-    toggle(state) {
-      state.show = !state.show;
-    },
-  },
-});
-
-const store = configureStore({
-  reducer: counterState.reducer,
-});
-
-export default store;
-export const counterActions = counterState.actions;
