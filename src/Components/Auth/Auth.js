@@ -10,20 +10,29 @@ const Auth = () => {
   const emailInputRef = useRef("");
   const passwordInputRef = useRef("");
   const [haveAccount, setHaveAccount] = useState(true);
+  const { error, loading, showLoginMessage } = useSelector(
+    (state) => state.auth.status
+  );
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.auth.error);
-  const loading = useSelector((state) => state.auth.loading);
 
   const signupHandler = (event) => {
     event.preventDefault();
-    signup(emailInputRef.current.value, passwordInputRef.current.value);
+    dispatch(authSliceActions.loading());
+    signup(emailInputRef.current.value, passwordInputRef.current.value).then(
+      (responseData) => {
+        if (responseData.user !== null) {
+          dispatch(authSliceActions.signup());
+        } else {
+          dispatch(authSliceActions.findError());
+        }
+      }
+    );
   };
   const signInHandler = (event) => {
     event.preventDefault();
-    dispatch(authSliceActions.isLoading());
+    dispatch(authSliceActions.loading());
     signIn(emailInputRef.current.value, passwordInputRef.current.value).then(
       (responseData) => {
-        dispatch(authSliceActions.stopLoading());
         if (responseData.session !== null) {
           dispatch(authSliceActions.login());
         } else {
@@ -46,7 +55,13 @@ const Auth = () => {
             <label htmlFor="password">Password</label>
             <input id="password" ref={passwordInputRef} type="password" />
             <div>
-              <button>Signup</button>
+              <button>
+                {loading ? (
+                  <i className="fa fa-spinner" aria-hidden="true"></i>
+                ) : (
+                  "Signup"
+                )}
+              </button>
             </div>
             <p onClick={changeFormHandler}> Have an account ? Login .</p>
           </form>
@@ -70,6 +85,9 @@ const Auth = () => {
           </form>
         )}
         {error && <h4> Something Went Wrong . Try again!</h4>}
+        {showLoginMessage && (
+          <h3> Please check your email and then try to login</h3>
+        )}
       </Card>
     </>
   );

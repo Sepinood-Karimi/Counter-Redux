@@ -23,6 +23,9 @@ const counterSlice = createSlice({
     toggle(state) {
       state.show = !state.show;
     },
+    reset(state) {
+      state = counterDefaultState;
+    },
   },
 });
 

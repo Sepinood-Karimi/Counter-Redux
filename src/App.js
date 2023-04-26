@@ -6,7 +6,7 @@ import classnames from "classnames";
 import { useSelector } from "react-redux";
 
 function App() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.status.isLoggedIn);
   return (
     <>
       <Header />

@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const authDefaultState = {
-  isLoggedIn: false,
-  error: "",
-  loading: false,
+  status: {
+    error: false,
+    isLoggedIn: false,
+    loading: false,
+    showLoginMessage: false,
+  },
 };
 
 const authSlice = createSlice({
@@ -11,21 +14,39 @@ const authSlice = createSlice({
   initialState: authDefaultState,
   reducers: {
     login(state) {
-      state.error = "";
-      state.isLoggedIn = true;
+      state.status = {
+        error: false,
+        isLoggedIn: true,
+        loading: false,
+        showLoginMessage: false,
+      };
     },
-    logout(state) {
-      state.isLoggedIn = false;
+    signup(state) {
+      state.status = {
+        error: false,
+        isLoggedIn: false,
+        loading: false,
+        showLoginMessage: true,
+      };
+    },
+    loading(state) {
+      state.status = {
+        error: false,
+        isLoggedIn: false,
+        loading: true,
+        showLoginMessage: false,
+      };
     },
     findError(state) {
-      state.isLoggedIn = false;
-      state.error = "Something went Wrong!";
+      state.status = {
+        error: true,
+        isLoggedIn: false,
+        loading: false,
+        showLoginMessage: false,
+      };
     },
-    isLoading(state) {
-      state.loading = true;
-    },
-    stopLoading(state) {
-      state.loading = false;
+    logout(state) {
+      state.status = authDefaultState;
     },
   },
 });
